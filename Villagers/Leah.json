@@ -1,0 +1,102 @@
+{
+    "birthday": 335,
+    "gift_preferences": [
+        "Salad",
+        "Wine",
+        "Goat Cheese",
+        "Truffle"
+    ],
+    "schedule": {
+        "1": {
+            "sunny": {
+                "06:00": "Cabin",
+                "09:00": "Forest",
+                "12:00": "Riverbank",
+                "18:00": "Cabin"
+            },
+            "rainy": {
+                "06:00": "Cabin",
+                "10:00": "Art Studio",
+                "15:00": "Cabin"
+            }
+        },
+        "2": {
+            "sunny": {
+                "06:00": "Cabin",
+                "09:00": "Cindersap Forest",
+                "14:00": "Town Square",
+                "19:00": "Cabin"
+            },
+            "rainy": {
+                "06:00": "Cabin",
+                "10:00": "Art Studio",
+                "17:00": "Cabin"
+            }
+        },
+        "3": {
+            "sunny": {
+                "06:00": "Cabin",
+                "09:00": "Riverbank",
+                "12:00": "Forest",
+                "18:00": "Cabin"
+            },
+            "rainy": {
+                "06:00": "Cabin",
+                "09:00": "Art Studio",
+                "16:00": "Cabin"
+            }
+        },
+        "4": {
+            "sunny": {
+                "06:00": "Cabin",
+                "09:00": "Town Square",
+                "13:00": "Forest",
+                "18:00": "Cabin"
+            },
+            "rainy": {
+                "06:00": "Cabin",
+                "10:00": "Art Studio",
+                "15:00": "Cabin"
+            }
+        },
+        "5": {
+            "sunny": {
+                "06:00": "Cabin",
+                "08:00": "Forest",
+                "13:00": "Cindersap Forest",
+                "18:00": "Cabin"
+            },
+            "rainy": {
+                "06:00": "Cabin",
+                "10:00": "Art Studio",
+                "17:00": "Cabin"
+            }
+        },
+        "6": {
+            "sunny": {
+                "06:00": "Cabin",
+                "09:00": "Riverbank",
+                "12:00": "Forest",
+                "19:00": "Cabin"
+            },
+            "rainy": {
+                "06:00": "Cabin",
+                "10:00": "Art Studio",
+                "16:00": "Cabin"
+            }
+        },
+        "7": {
+            "sunny": {
+                "06:00": "Cabin",
+                "09:00": "Forest",
+                "12:00": "Town Square",
+                "18:00": "Cabin"
+            },
+            "rainy": {
+                "06:00": "Cabin",
+                "09:00": "Art Studio",
+                "15:00": "Cabin"
+            }
+        }
+    }
+}

@@ -1,0 +1,102 @@
+{
+    "birthday": 4,
+    "gift_preferences": [
+        "Amethyst",
+        "Pumpkin",
+        "Spicy Eel",
+        "Chocolate Cake"
+    ],
+    "schedule": {
+        "1": {
+            "sunny": {
+                "06:00": "Home",
+                "09:00": "Town Square",
+                "13:00": "Riverbank",
+                "18:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "09:00": "Library",
+                "14:00": "Home"
+            }
+        },
+        "2": {
+            "sunny": {
+                "06:00": "Home",
+                "10:00": "Forest",
+                "15:00": "Saloon",
+                "20:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "11:00": "General Store",
+                "17:00": "Home"
+            }
+        },
+        "3": {
+            "sunny": {
+                "06:00": "Home",
+                "09:00": "Mountain Lake",
+                "14:00": "Town Square",
+                "19:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "10:00": "Library",
+                "16:00": "Home"
+            }
+        },
+        "4": {
+            "sunny": {
+                "06:00": "Home",
+                "09:00": "Forest",
+                "13:00": "Cindersap Forest",
+                "18:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "10:00": "Carpenter's Shop",
+                "15:00": "Home"
+            }
+        },
+        "5": {
+            "sunny": {
+                "06:00": "Home",
+                "08:00": "General Store",
+                "12:00": "Bridge",
+                "17:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "09:00": "Library",
+                "14:00": "Home"
+            }
+        },
+        "6": {
+            "sunny": {
+                "06:00": "Home",
+                "09:00": "Saloon",
+                "13:00": "Mountain Lake",
+                "19:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "10:00": "Library",
+                "17:00": "Home"
+            }
+        },
+        "7": {
+            "sunny": {
+                "06:00": "Home",
+                "09:00": "Town Square",
+                "13:00": "Riverbank",
+                "18:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "09:00": "Library",
+                "15:00": "Home"
+            }
+        }
+    }
+}

@@ -1,0 +1,102 @@
+{
+    "birthday": 121,
+    "gift_preferences": [
+        "Pizza",
+        "Tigerseye",
+        "Cactus Fruit",
+        "Joja Cola"
+    ],
+    "schedule": {
+        "1": {
+            "sunny": {
+                "06:00": "Home",
+                "09:00": "Bridge",
+                "13:00": "Skate Park",
+                "18:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "10:00": "Arcade",
+                "15:00": "Home"
+            }
+        },
+        "2": {
+            "sunny": {
+                "06:00": "Home",
+                "08:00": "Town Square",
+                "12:00": "JojaMart",
+                "19:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "11:00": "Arcade",
+                "16:00": "Home"
+            }
+        },
+        "3": {
+            "sunny": {
+                "06:00": "Home",
+                "09:00": "Beach",
+                "14:00": "Bridge",
+                "18:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "09:00": "Arcade",
+                "15:00": "Home"
+            }
+        },
+        "4": {
+            "sunny": {
+                "06:00": "Home",
+                "09:00": "JojaMart",
+                "13:00": "Town Square",
+                "19:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "10:00": "Arcade",
+                "16:00": "Home"
+            }
+        },
+        "5": {
+            "sunny": {
+                "06:00": "Home",
+                "08:00": "Beach",
+                "12:00": "Bridge",
+                "17:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "09:00": "Arcade",
+                "14:00": "Home"
+            }
+        },
+        "6": {
+            "sunny": {
+                "06:00": "Home",
+                "09:00": "Bridge",
+                "13:00": "Skate Park",
+                "18:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "10:00": "Arcade",
+                "15:00": "Home"
+            }
+        },
+        "7": {
+            "sunny": {
+                "06:00": "Home",
+                "09:00": "JojaMart",
+                "13:00": "Town Square",
+                "18:00": "Home"
+            },
+            "rainy": {
+                "06:00": "Home",
+                "10:00": "Arcade",
+                "16:00": "Home"
+            }
+        }
+    }
+}
