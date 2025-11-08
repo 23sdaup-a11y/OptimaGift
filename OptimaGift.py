@@ -25,16 +25,66 @@ LOCATION_COORDS = {
 
 class villager():
     '''A class to represent a villager in Stardew Valley.'''
-    def __init__(self, name: str, birthday: int | None = None, giftPreferences: list[str] | None = None, locationSchedule: dict | None = None):
+    def __init__(self, name: str, birthday: int, giftPreferences: list[str], locationScheduleTimes: list[str], locationSchedule: list[str]):
         self.name = name
         self.birthday = birthday
-        self.giftPreferences = giftPreferences or []
+        self.giftPreferences = giftPreferences
         # self.beenGifted1 = False
         # self.beenGifted2 = False
         self.visitedToday = False
 
-    # locationSchedule will be a mapping for the chosen day: { time(str): location(str) }
-        self.locationSchedule = locationSchedule or {}
+        # locationScheduleTimes: list of time strings ("HH:MM") in chronological order
+        # locationSchedule: parallel list of location names matching the times by index
+        self.locationScheduleTimes = locationScheduleTimes
+        self.locationSchedule = locationSchedule
+
+    @staticmethod
+    def _time_str_to_minutes(time_str: str) -> int:
+        """Convert a time string "HH:MM" to minutes since midnight.
+
+        Raises ValueError if the string is not well-formed.
+        """
+        parts = time_str.split(":")
+        if len(parts) != 2:
+            raise ValueError(f"Invalid time string: {time_str}")
+        h, m = int(parts[0]), int(parts[1])
+        return h * 60 + m
+
+    def location_at(self, time_str: str, default=None):
+        """Return the villager's location at the given time ("HH:MM").
+
+        Behavior:
+        - Finds the most recent scheduled time that is <= the query time and returns
+          the corresponding location.
+        - If the query time is earlier than the first scheduled time, returns
+          `default` (None by default).
+
+        Example: with schedule_times ["06:00","09:00","13:00"] and
+        schedule_locs ["Home","Town Square","Riverbank"]:
+        - location_at("08:00") -> "Home"
+        - location_at("09:00") -> "Town Square"
+        - location_at("05:00") -> None
+        """
+        try:
+            q_min = self._time_str_to_minutes(time_str)
+        except ValueError:
+            raise
+
+        last_idx = None
+        for idx, t in enumerate(self.locationScheduleTimes):
+            try:
+                t_min = self._time_str_to_minutes(t)
+            except ValueError:
+                # malformed schedule time: skip
+                raise
+            if t_min <= q_min:
+                last_idx = idx
+            else:
+                break
+
+        if last_idx is None:
+            return default
+        return self.locationSchedule[last_idx]
 
 def createVillagerList(day: int, rainy: bool):
     '''Creates a list of villager objects with their gift preferences, birthdays and schedules.
@@ -58,18 +108,36 @@ def createVillagerList(day: int, rainy: bool):
                 data = json.load(f)
             except Exception as e:
                 print(f"Warning: failed to parse {file_path}: {e}")
-                continue
+                exit(1)
 
         # Derive name from filename (remove extension)
         name = os.path.splitext(VillagerFile)[0]
 
         # Extract simple fields
-        birthday = data.get('birthday')
-        gift_prefs = data.get('gift_preferences') or data.get('giftPreferences') or []
+        try:
+            birthday = data.get('birthday')
+        except Exception as e:
+            print(f"Warning: failed to get birthday for {name}: {e}")
+            exit(1)    
+    
+        try:
+            gift_prefs = data.get('giftPreferences')
+        except Exception as e:
+            print(f"Warning: failed to get giftPreferences for {name}: {e}")
+            exit(1)
 
         # Parse schedule and pick only the chosen weather for the requested day.
-        raw_schedule = data.get('schedule') or {}
-        parsed_schedule: dict[str, str] = {}
+        try: 
+            raw_schedule = data.get('schedule')
+        except Exception as e:
+            print(f"Warning: failed to get schedule for {name}: {e}")
+            exit(1)
+
+        # We'll store the schedule as two parallel lists that can be indexed by position
+        # - parsedScheduleTimes: list of time strings (e.g. "06:00") in chronological order
+        # - parsedSchedule: list of location strings matching the times list by index
+        parsedScheduleTimes: list[str] = []
+        parsedSchedule: list[str] = []
 
         # Normalize day lookup (JSON keys are strings)
         day_key_str = str(day)
@@ -78,14 +146,17 @@ def createVillagerList(day: int, rainy: bool):
             weather_key = 'rainy' if rainy else 'sunny'
             times = day_val.get(weather_key) or {}
             if isinstance(times, dict):
-                # Save only the mapping time -> location for this day
-                parsed_schedule = dict(times)
+                # times is a mapping time_str -> location. Convert it into two parallel
+                # lists (times, locations) sorted by time so we can index by position later.
+                for time_str, loc in sorted(times.items(), key=lambda x: x[0]):
+                    parsedScheduleTimes.append(time_str)
+                    parsedSchedule.append(loc)
             else:
                 raise(KeyError(f"Weather '{weather_key}' schedule for day {day} not found in schedule for villager {name}"))
         else:
             raise(KeyError(f"Day {day} not found in schedule for villager {name}"))
 
-        v = villager(name=name, birthday=birthday, giftPreferences=gift_prefs, locationSchedule=parsed_schedule)
+        v = villager(name=name, birthday=birthday, giftPreferences=gift_prefs, locationScheduleTimes=parsedScheduleTimes, locationSchedule=parsedSchedule)
         villagerList.append(v)
 
     # villagerList is a list of all the villager objects that we can iterate over later and pass to the calculate_path function
@@ -126,4 +197,5 @@ if __name__ == '__main__':
     villagers = createVillagerList(1, False)
     print(f"Loaded {len(villagers)} villagers:")
     for villager in villagers:
-        print(f"- {villager.name}: birthday={villager.birthday}, gifts={villager.giftPreferences}, schedule_times={sorted(list(villager.locationSchedule.keys()))}")
+        print(f"- {villager.name}: birthday={villager.birthday}, gifts={villager.giftPreferences}, schedule_times={villager.locationScheduleTimes}, schedule_locs={villager.locationSchedule}")
+        print(f"  Location at 15:30: {villager.location_at('15:30')}")
